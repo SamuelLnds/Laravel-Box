@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
 
     // Routes boxes
     Route::get('/storage', [BoxController::class, 'index'])->name('storage_boxes.index');
+    Route::get('/storage/{id}/show', [BoxController::class, 'show'])->name('storage_boxes.show');
 });
 
 require __DIR__.'/auth.php';

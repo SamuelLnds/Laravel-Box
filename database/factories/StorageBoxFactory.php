@@ -27,6 +27,7 @@ class StorageBoxFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
+            'name' => $this->faker->company(),
             'size' => $this->faker->randomElement(['small', 'medium', 'large']),
             'monthly_cost' => $this->faker->randomFloat(2, 10, 500),
             'availability' => $this->faker->boolean(),

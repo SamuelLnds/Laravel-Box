@@ -6,6 +6,7 @@
                     <table class="mx-auto">
                         <thead>
                             <tr>
+                                <th>Nom</th>
                                 <th>Taille</th>
                                 <th>Coût mensuel</th>
                                 <th>Disponibilité</th>
@@ -14,6 +15,7 @@
                         <tbody>
                             @foreach ($boxes as $box)
                                 <tr>
+                                    <td><a href="{{ route('storage_boxes.show', $box->id) }}">{{ $box->name }}</a></td>
                                     <td>{{ ucfirst($box->size) }}</td>
                                     <td>{{ $box->monthly_cost  }}€</td>
                                     <td> <input type="checkbox" {{ $box->availability ? 'checked' : '' }} disabled/> </td>

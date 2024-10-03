@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('storage_boxes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('name');
             $table->enum('size', ['small', 'medium', 'large']); // lower le texte envoyé en valeur
             $table->decimal('monthly_cost', 8, 2);
             $table->boolean('availability')->default(true);
