@@ -25,6 +25,10 @@ class DatabaseSeeder extends Seeder
 
         User::factory(10)->create();
 
+        StorageBox::factory(7)->create([
+            'user_id' => '1'
+        ]);
+
         StorageBox::factory(5)->create();
 
     }
