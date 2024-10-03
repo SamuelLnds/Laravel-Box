@@ -16,7 +16,7 @@
         </style>
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
-        <header>
+        <main>
                 @if (Route::has('login'))
                     <nav class="flex justify-center">
                         @auth
@@ -45,6 +45,6 @@
                         @endauth
                     </nav>
                 @endif
-        </header>
+        </main>
     </body>
 </html>
