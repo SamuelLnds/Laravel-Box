@@ -11,6 +11,7 @@
                                     <th>Taille</th>
                                     <th>Coût mensuel</th>
                                     <th>Disponibilité</th>
+                                    <th>Locataire</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -20,6 +21,13 @@
                                         <td>{{ ucfirst($box->size) }}</td>
                                         <td>{{ $box->monthly_cost  }}€</td>
                                         <td> <input type="checkbox" {{ $box->availability ? 'checked' : '' }} disabled/> </td>
+                                        <td>
+                                            @if ($box->tenant)
+                                                {{ $box->tenant->first_name }} {{ $box->tenant->last_name }}
+                                            @else
+                                                —
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -14,15 +14,17 @@ class BoxController extends Controller
 
         $userId = Auth::id();
         $boxes = StorageBox::where('user_id', $userId)->get();
+        $tenants = Tenant::where('user_id', Auth::id())->get();
 
-        return view('storage_boxes.index', ["boxes" => $boxes]);
+        return view('storage_boxes.index', ["boxes" => $boxes], ['tenants' => $tenants]);
     }
 
     public function show($id)
     {
+        $tenants = Tenant::where('user_id', Auth::id())->get();
         return view('storage_boxes.show', [
             "box" => StorageBox::findOrFail($id)
-        ]);
+        ], ['tenants' => $tenants]);
     }
 
     public function update(Request $request, $id)
@@ -42,8 +44,7 @@ class BoxController extends Controller
         $box->monthly_cost = $request->get('monthly_cost');
 
         $box->tenant_id = $request->get('tenant_id');
-        if($box->tenant_id != "") { $box->availability = true; } 
-         { $box->availability = false; }
+        $box->tenant_id ? $box->availability = false : $box->availability = true;
         $box->save();
 
         return redirect()->route('storage_boxes.index');
