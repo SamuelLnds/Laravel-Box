@@ -23,6 +23,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/storage/{id}/show', [BoxController::class, 'show'])->name('storage_boxes.show');
     Route::put('/storage/{id}', [BoxController::class, 'update'])->name('storage_boxes.update');
     Route::delete('/storage/{id}', [BoxController::class, 'destroy'])->name('storage_boxes.destroy');
+    Route::get('/storage/create', [BoxController::class, 'create'])->name('storage_boxes.create');
+    Route::post('/storage', [BoxController::class, 'store'])->name('storage_boxes.store');
 });
 
 require __DIR__.'/auth.php';

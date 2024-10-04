@@ -28,6 +28,9 @@
                         Vous n'avez pas de storage box !
                     @endif
                 </div>
+                <div class="p-6 text-gray-900 dark:text-gray-100 text-center">
+                    <a href="{{ route('storage_boxes.create') }}" class="add-btn">Ajouter une nouvelle storage box</a>
+                </div>
             </div>
         </div>
     </div>
@@ -46,6 +49,16 @@
 
     th, td {
         padding: .25rem .5rem;
+    }
+
+    .add-btn {
+        padding: .5rem 1rem;
+        border: solid 1px white;
+        margin-inline: auto;
+
+        &:hover {
+            border: solid 2px white;
+        }
     }
 
 </style>

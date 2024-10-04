@@ -11,6 +11,7 @@ class StorageBox extends Model
 
     protected $fillable = [
         'user_id',
+        'name',
         'size',
         'monthly_cost',
         'availability',

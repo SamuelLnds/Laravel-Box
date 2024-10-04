@@ -7,25 +7,44 @@
                     <form id="updateForm" action="{{ route('storage_boxes.update', $box->id) }}" method="POST">
                         @csrf
                         @method('PUT')
+                    
+                        <!-- Name Field -->
                         <label for="name">Nom</label>
-                        <input type="text" name="name" id="name" value="{{ $box->name }}"/>
+                        <input type="text" name="name" id="name" value="{{ old('name', $box->name) }}"/>
+                        @if ($errors->has('name'))
+                            <span>{{ $errors->first('name') }}</span>
+                        @endif
+                    
+                        <!-- Size Field -->
                         <label for="size">Taille</label>
                         <select name="size" id="size">
-                            <option value="small" {{ $box->size == "small" ? 'selected' : '' }}>Small</option>
-                            <option value="medium" {{ $box->size == "medium" ? 'selected' : '' }}>Medium</option>
-                            <option value="large" {{ $box->size == "large" ? 'selected' : '' }}>Large</option>
+                            <option value="small" {{ old('size', $box->size) == 'small' ? 'selected' : '' }}>Small</option>
+                            <option value="medium" {{ old('size', $box->size) == 'medium' ? 'selected' : '' }}>Medium</option>
+                            <option value="large" {{ old('size', $box->size) == 'large' ? 'selected' : '' }}>Large</option>
                         </select>
+                        @if ($errors->has('size'))
+                            <span>{{ $errors->first('size') }}</span>
+                        @endif
+                    
+                        <!-- Monthly Cost Field -->
                         <label for="monthly_cost">Coût mensuel (en €)</label>
-                        <input type="number" name="monthly_cost" id="monthly_cost" value="{{ $box->monthly_cost }}"/>
-                        <span class="form-inline mt-6">
+                        <input type="number" name="monthly_cost" id="monthly_cost" value="{{ old('monthly_cost', $box->monthly_cost) }}"/>
+                        @if ($errors->has('monthly_cost'))
+                            <span>{{ $errors->first('monthly_cost') }}</span>
+                        @endif
+                    
+                        <!-- Availability Checkbox -->
+                        <span e mt-6">
                             <label for="availability">Disponible ?</label>
-                            <input name="availability" id="availability" type="checkbox" {{ $box->availability ? 'checked' : '' }}/> 
+                            <input name="availability" id="availability" type="checkbox" value="on" {{ old('availability', $box->availability) ? 'checked' : '' }}/>
                         </span>
-                        
-                        {{-- TODO : ADD TENANTS --}}
-
+                        @if ($errors->has('availability'))
+                            <span>{{ $errors->first('availability') }}</span>
+                        @endif
+                    
                         <button type="submit">Enregistrer les modifications</button>
                     </form>
+                    
 
                     <form id="deleteForm" action="{{ route('storage_boxes.destroy', $box->id) }}" method="POST">
                         @csrf
@@ -71,7 +90,7 @@
         text-decoration: underline;
     }
 
-    input[type=text], select {
+    input[type=text], input[type=number], select {
         background-color: transparent;
     }
 
