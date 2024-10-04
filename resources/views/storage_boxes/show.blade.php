@@ -3,6 +3,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100 text-center">
+
                     <form id="updateForm" action="{{ route('storage_boxes.update', $box->id) }}" method="POST">
                         @csrf
                         @method('PUT')
@@ -15,7 +16,7 @@
                             <option value="large" {{ $box->size == "large" ? 'selected' : '' }}>Large</option>
                         </select>
                         <label for="monthly_cost">Coût mensuel (en €)</label>
-                        <input type="text" name="monthly_cost" id="monthly_cost" value="{{ $box->monthly_cost }}"/>
+                        <input type="number" name="monthly_cost" id="monthly_cost" value="{{ $box->monthly_cost }}"/>
                         <span class="form-inline mt-6">
                             <label for="availability">Disponible ?</label>
                             <input name="availability" id="availability" type="checkbox" {{ $box->availability ? 'checked' : '' }}/> 
@@ -34,6 +35,7 @@
 
                     <br/><hr/><br/>
                     <a href="{{ route('storage_boxes.index') }}">Revenir à vos storage boxes</a>
+
                 </div>
             </div>
         </div>
@@ -139,5 +141,5 @@
         });
 
     });
-    
+
 </script>
