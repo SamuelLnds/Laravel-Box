@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100 text-center">
-                    <form action="{{ route('storage_boxes.update', $box->id) }}" method="POST">
+                    <form id="updateForm" action="{{ route('storage_boxes.update', $box->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <label for="name">Nom</label>
@@ -22,12 +22,14 @@
                         </span>
                         
                         {{-- TODO : ADD TENANTS --}}
+
                         <button type="submit">Enregistrer les modifications</button>
                     </form>
-                    <form action="{{ route('storage_boxes.destroy', $box->id) }}" method="POST">
+
+                    <form id="deleteForm" action="{{ route('storage_boxes.destroy', $box->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit">Supprimer</button>
+                        <button id="deleteButton" type="submit">Supprimer</button>
                     </form>
 
                     <br/><hr/><br/>
@@ -87,3 +89,55 @@
     }
     
 </style>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+        let isFormSubmitting = false;
+
+        document.getElementById('deleteButton').addEventListener('click', function(event) {
+            event.preventDefault();
+            if (confirm('Êtes-vous sûr de vouloir supprimer cette boîte de stockage ? Cette action est irréversible.')) {
+                isFormSubmitting = true;
+                document.getElementById('deleteForm').submit();
+            }
+        });
+
+        let initialData = {
+            name: document.getElementById('name').value,
+            size: document.getElementById('size').value,
+            monthly_cost: document.getElementById('monthly_cost').value,
+            availability: document.getElementById('availability').checked
+        };
+
+        let isFormModified = false;
+
+        document.getElementById('updateForm').addEventListener('change', function(event) {
+            isFormModified = checkFormChanges();
+        });
+
+        document.getElementById('updateForm').addEventListener('submit', function(event) {
+            isFormSubmitting = true;
+        });
+
+        function checkFormChanges() {
+            return (
+                initialData.name !== document.getElementById('name').value ||
+                initialData.size !== document.getElementById('size').value ||
+                initialData.monthly_cost !== document.getElementById('monthly_cost').value ||
+                initialData.availability !== document.getElementById('availability').checked
+            );
+        }
+
+        window.addEventListener('beforeunload', function(event) {
+            if (isFormModified && !isFormSubmitting) {
+                const message = 'Vous avez des modifications non enregistrées. Êtes-vous sûr de vouloir quitter cette page ?';
+                event.returnValue = message;
+                return message;
+            }
+        });
+
+    });
+    
+</script>
