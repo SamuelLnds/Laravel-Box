@@ -44,6 +44,9 @@
 
                         <button type="submit">Enregistrer les modifications</button>
                     </form>
+                    
+                    <br/><hr/><br/>
+                    <a href="{{ route('storage_boxes.index') }}">Revenir à vos storage boxes</a>
                 </div>
             </div>
         </div>
