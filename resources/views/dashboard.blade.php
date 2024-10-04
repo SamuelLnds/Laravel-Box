@@ -4,6 +4,8 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <a href="{{ route('storage_boxes.index') }}">Accéder à toutes vos storage boxes</a>
+                    <br/><br/>
+                    <a href="{{ route('tenants.index') }}">Accéder aux informations de vos locataires</a>
                 </div>
             </div>
         </div>

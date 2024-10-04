@@ -4,56 +4,53 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100 text-center">
 
-                    <form id="updateForm" action="{{ route('storage_boxes.update', $box->id) }}" method="POST">
+                    <form id="updateForm" action="{{ route('tenants.update', $tenant->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                     
-                        <!-- Name Field -->
-                        <label for="name">Nom</label>
-                        <input type="text" name="name" id="name" value="{{ old('name', $box->name) }}"/>
-                        @if ($errors->has('name'))
-                            <span>{{ $errors->first('name') }}</span>
+                        <label for="first_name">Prénom</label>
+                        <input type="text" name="first_name" id="first_name" value="{{ old('first_name', $tenant->first_name) }}"/>
+                        @if ($errors->has('first_name'))
+                            <span>{{ $errors->first('first_name') }}</span>
                         @endif
-                    
-                        <!-- Size Field -->
-                        <label for="size">Taille</label>
-                        <select name="size" id="size">
-                            <option value="small" {{ old('size', $box->size) == 'small' ? 'selected' : '' }}>Small</option>
-                            <option value="medium" {{ old('size', $box->size) == 'medium' ? 'selected' : '' }}>Medium</option>
-                            <option value="large" {{ old('size', $box->size) == 'large' ? 'selected' : '' }}>Large</option>
-                        </select>
-                        @if ($errors->has('size'))
-                            <span>{{ $errors->first('size') }}</span>
+
+                        <label for="last_name">Nom</label>
+                        <input type="text" name="last_name" id="last_name" value="{{ old('last_name', $tenant->last_name) }}"/>
+                        @if ($errors->has('last_name'))
+                            <span>{{ $errors->first('last_name') }}</span>
                         @endif
-                    
-                        <!-- Monthly Cost Field -->
-                        <label for="monthly_cost">Coût mensuel (en €)</label>
-                        <input type="number" name="monthly_cost" id="monthly_cost" value="{{ old('monthly_cost', $box->monthly_cost) }}"/>
-                        @if ($errors->has('monthly_cost'))
-                            <span>{{ $errors->first('monthly_cost') }}</span>
+
+                        <label for="email">Mail</label>
+                        <input type="text" name="email" id="email" value="{{ old('email', $tenant->email) }}"/>
+                        @if ($errors->has('email'))
+                            <span>{{ $errors->first('email') }}</span>
                         @endif
-                    
-                        <!-- Availability Checkbox -->
-                        <span class="mt-6">
-                            <label for="availability">Disponible ?</label>
-                            <input name="availability" id="availability" type="checkbox" value="on" {{ old('availability', $box->availability) ? 'checked' : '' }}/>
-                        </span>
-                        @if ($errors->has('availability'))
-                            <span>{{ $errors->first('availability') }}</span>
+
+                        <label for="phone_number">Numéro de téléphone</label>
+                        <input type="text" name="phone_number" id="phone_number" value="{{ old('phone_number', $tenant->phone_number) }}"/>
+                        @if ($errors->has('phone_number'))
+                            <span>{{ $errors->first('phone_number') }}</span>
                         @endif
-                    
+
+                        <label for="address">Adresse</label>
+                        <input type="text" name="address" id="address" value="{{ old('address', $tenant->address) }}"/>
+                        @if ($errors->has('address'))
+                            <span>{{ $errors->first('address') }}</span>
+                        @endif
+
+                        <br/>
                         <button type="submit">Enregistrer les modifications</button>
                     </form>
                     
 
-                    <form id="deleteForm" action="{{ route('storage_boxes.destroy', $box->id) }}" method="POST">
+                    <form id="deleteForm" action="{{ route('tenants.destroy', $tenant->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button id="deleteButton" type="submit">Supprimer</button>
                     </form>
 
                     <br/><hr/><br/>
-                    <a href="{{ route('storage_boxes.index') }}">Revenir à vos storage boxes</a>
+                    <a href="{{ route('tenants.index') }}">Revenir à vos locataires</a>
 
                 </div>
             </div>
@@ -126,10 +123,11 @@
         });
 
         let initialData = {
-            name: document.getElementById('name').value,
-            size: document.getElementById('size').value,
-            monthly_cost: document.getElementById('monthly_cost').value,
-            availability: document.getElementById('availability').checked
+            first_name: document.getElementById('first_name').value,
+            last_name: document.getElementById('last_name').value,
+            email: document.getElementById('email').value,
+            phone_number: document.getElementById('phone_number').value,
+            address: document.getElementById('address').value
         };
 
         let isFormModified = false;
@@ -144,10 +142,11 @@
 
         function checkFormChanges() {
             return (
-                initialData.name !== document.getElementById('name').value ||
-                initialData.size !== document.getElementById('size').value ||
-                initialData.monthly_cost !== document.getElementById('monthly_cost').value ||
-                initialData.availability !== document.getElementById('availability').checked
+                initialData.first_name !== document.getElementById('first_name').value ||
+                initialData.last_name !== document.getElementById('last_name').value ||
+                initialData.email !== document.getElementById('email').value ||
+                initialData.phone_number !== document.getElementById('phone_number').value ||
+                initialData.address !== document.getElementById('address').value
             );
         }
 
