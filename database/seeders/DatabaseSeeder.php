@@ -24,17 +24,19 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
 
-        User::factory(10)->create();
+        User::factory(2)->create();
 
-        StorageBox::factory(7)->create([
+        Tenant::factory(5)->create([
             'user_id' => '1'
         ]);
 
-        StorageBox::factory(5)->create();
+        StorageBox::factory(3)->create([
+            'user_id' => '1',
+            'tenant_id' => '1'
+        ])->each(function ($box) {
+            $box->availability = is_null($box->tenant_id) ? true : false;
+            $box->save();
+        });
 
-        Tenant::factory(15)->create();
-        Tenant::factory(7)->create([
-            'user_id' => '1'
-        ]);
     }
 }
