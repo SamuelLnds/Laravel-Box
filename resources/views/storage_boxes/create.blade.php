@@ -31,16 +31,19 @@
                             <span class="text-red-500">{{ $errors->first('monthly_cost') }}</span>
                         @endif
 
-                        <!-- Availability Checkbox -->
-                        <span class="form-inline mt-6">
-                            <label for="availability">Disponible ?</label>
-                            <input name="availability" id="availability" type="checkbox" {{ old('availability', true) ? 'checked' : '' }}/>
-                        </span>
-                        @if ($errors->has('availability'))
-                            <span class="text-red-500">{{ $errors->first('availability') }}</span>
+                        <!-- Tenant Select Field -->
+                        <label for="tenant_id">Locataire (Optionnel)</label>
+                        <select name="tenant_id" id="tenant_id">
+                            <option value="">Aucun locataire</option>
+                            @foreach ($tenants as $tenant)
+                                <option value="{{ $tenant->id }}" {{ old('tenant_id') == $tenant->id ? 'selected' : '' }}>
+                                    {{ $tenant->first_name }} {{ $tenant->last_name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('tenant_id'))
+                            <span class="text-red-500">{{ $errors->first('tenant_id') }}</span>
                         @endif
-
-                        {{-- TODO : ADD TENANTS --}}
 
                         <button type="submit">Enregistrer les modifications</button>
                     </form>
