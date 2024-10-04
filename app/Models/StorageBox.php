@@ -32,12 +32,12 @@ class StorageBox extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    // /**
-    //  * Get the tenant that is renting the storage box.
-    //  */
-    // public function tenant()
-    // {
-    //     return $this->belongsTo(User::class, 'tenant_id');
-    // }
+    /**
+     * Get the tenant that is renting the storage box.
+     */
+    public function tenant()
+    {
+        return $this->belongsTo(User::class, 'tenant_id');
+    }
 
 }

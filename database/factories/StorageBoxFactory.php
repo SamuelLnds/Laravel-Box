@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\StorageBox;
+use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -31,7 +32,7 @@ class StorageBoxFactory extends Factory
             'size' => $this->faker->randomElement(['small', 'medium', 'large']),
             'monthly_cost' => $this->faker->randomFloat(2, 10, 500),
             'availability' => $this->faker->boolean(),
-            'tenant_id' => null, // locataire null tant que table tenants pas créée
+            'tenant_id' => Tenant::factory(),
         ];
     }
 }
