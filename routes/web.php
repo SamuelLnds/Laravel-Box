@@ -21,6 +21,8 @@ Route::middleware('auth')->group(function () {
     // Routes boxes
     Route::get('/storage', [BoxController::class, 'index'])->name('storage_boxes.index');
     Route::get('/storage/{id}/show', [BoxController::class, 'show'])->name('storage_boxes.show');
+    Route::put('/storage/{id}', [BoxController::class, 'update'])->name('storage_boxes.update');
+    Route::delete('/storage/{id}', [BoxController::class, 'destroy'])->name('storage_boxes.destroy');
 });
 
 require __DIR__.'/auth.php';

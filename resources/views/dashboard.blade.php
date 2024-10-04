@@ -11,7 +11,7 @@
 </x-app-layout>
 
 <style>
-    a {
+    a:not(nav a) {
         text-decoration: underline;
     }
     

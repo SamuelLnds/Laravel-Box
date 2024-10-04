@@ -3,26 +3,30 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100 text-center">
-                    <table class="mx-auto">
-                        <thead>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Taille</th>
-                                <th>Coût mensuel</th>
-                                <th>Disponibilité</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($boxes as $box)
+                    @if (count($boxes) > 0)
+                        <table class="mx-auto">
+                            <thead>
                                 <tr>
-                                    <td><a href="{{ route('storage_boxes.show', $box->id) }}">{{ $box->name }}</a></td>
-                                    <td>{{ ucfirst($box->size) }}</td>
-                                    <td>{{ $box->monthly_cost  }}€</td>
-                                    <td> <input type="checkbox" {{ $box->availability ? 'checked' : '' }} disabled/> </td>
+                                    <th>Nom</th>
+                                    <th>Taille</th>
+                                    <th>Coût mensuel</th>
+                                    <th>Disponibilité</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($boxes as $box)
+                                    <tr>
+                                        <td><a href="{{ route('storage_boxes.show', $box->id) }}">{{ $box->name }}</a></td>
+                                        <td>{{ ucfirst($box->size) }}</td>
+                                        <td>{{ $box->monthly_cost  }}€</td>
+                                        <td> <input type="checkbox" {{ $box->availability ? 'checked' : '' }} disabled/> </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @else
+                        Vous n'avez pas de storage box !
+                    @endif
                 </div>
             </div>
         </div>
